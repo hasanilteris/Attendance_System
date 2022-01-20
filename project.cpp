@@ -220,6 +220,7 @@ void kayit()
     dosya.println(rfid.serNum[4]);
     dosya.close();  // dosya kapandı
   }
+  
     else {
     }
   delay(1000);
