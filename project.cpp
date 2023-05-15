@@ -4,7 +4,7 @@
 #include <require_cpp11.h>
 #include <LiquidCrystal.h>
 #include <Wire.h>
-#include <SD.h> // hafıza kartı kütüphanesi
+#include <SD.h>
 #include <SPI.h>
 #include <RFID.h>
 #define RFID_RST_PIN 9
@@ -14,8 +14,8 @@ int say = 0;
 RFID rfid(RFID_SS_PIN, RFID_RST_PIN);
 const int rs = 7, en = 6, d4 = 5, d5 = 4, d6 = 3, d7 = 2;
 LiquidCrystal lcd(rs, en, d4, d5, d6, d7);
-#define CSpin 4 // hafıza kartı seçim pini
-File dosya; // dosya
+#define CSpin 4 
+File dosya; 
 byte kisi = 0;
 byte bir[5] = {68 , 231 , 98 , 251 , 58};
 byte iki[5] = {68 , 108 , 97 , 251 , 178};
@@ -35,7 +35,7 @@ void setup() {
   SPI.begin();
   rfid.init();
   lcd.begin(16, 2);
-  if (!SD.begin(CSpin)) { // sd kart başlangıç pini
+  if (!SD.begin(CSpin)) { 
     lcd.clear();
     lcd.setCursor (0, 0);
     lcd.println(" SD KART TAKILI ");
@@ -68,8 +68,8 @@ void loop() {
   lcd.setCursor (0, 0);
   lcd.println("OGRENCI YOKLAMA SISTEMI");
   lcd.setCursor (0, 1);
-  digitalWrite(RFID_SS_PIN, LOW); //open RFID
-  digitalWrite(CSpin, HIGH); //yaz aktif
+  digitalWrite(RFID_SS_PIN, LOW); 
+  digitalWrite(CSpin, HIGH); 
   if (rfid.isCard())
   {
     if (rfid.readCardSerial())
@@ -179,9 +179,9 @@ kayit();
 void kayit()
 {
   digitalWrite(8, LOW);
-  digitalWrite(RFID_SS_PIN, HIGH); // RFID pasif
-  digitalWrite(CSpin, LOW); //yaz aktif
-  dosya = SD.open("DOSYAM.txt", FILE_WRITE); //dosya oluşturuldu ve yazma modunda açıldı
+  digitalWrite(RFID_SS_PIN, HIGH); 
+  digitalWrite(CSpin, LOW); 
+  dosya = SD.open("DOSYAM.txt", FILE_WRITE); 
   if (SD.exists("DOSYAM.txt")) { //
     Serial.println("KAYIT YAPILDI");
     lcd.setCursor (15, 1);
@@ -218,7 +218,7 @@ void kayit()
     dosya.print(rfid.serNum[3]);
     dosya.print(",");
     dosya.println(rfid.serNum[4]);
-    dosya.close();  // dosya kapandı
+    dosya.close(); 
   }
   
     else {
